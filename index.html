@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mina weather app</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />  
+<script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+  </head>
+<body>
+  <form class="city" id="seach-form">
+    <lable > Pick a City </lable>
+    <input  type="search" placeholder="Choose a city" autocomplete="off" autofocus="on" id="seach-text-input">
+    <input type="submit" value="search"/>
+  </form>
+  <div class="container">
+    <table class="todayall">
+    <tr>
+      <th scope="col" class="Location" > <span class="material-symbols-outlined">
+      location_on </span> <span id="city-location">Location</span> 
+      <br/> 
+      <img src="tehran.jpg" width="100px" height="100px" style="border: 2px solid white;">
+      <br/>
+      <button class="currentLocation" id="current-location">Current location</button></th>
+      <th scope="col" ><div class="date">
+        <!---- <span id="real-time">19:32</span><br/>
+        <span id="today-date">September 29</span><sub>th</sub><br/>
+        <span id="today-day">Thursday</span> -->
+        <span id="today">Date</span><br/>
+        <span class="material-symbols-outlined">
+          device_thermostat
+          </span><span id="tempreture" class="tempreture"> 19 </span>
+        <a href="#" id="celcius">°C</a> | <a href="#" id="farenheit">°F</a>
+        </div></th>
+      <th scope="col"><div class="today">
+        <span class="material-symbols-outlined" class="today">
+          clear_day
+          </span><br/>
+          Sunny
+        </div></th>
+    </tr>
+    </table>
+    <table class="table table-bordered">
+        <tr class="otherdays">
+          <th scope="col" class="otherdays"><span class="material-symbols-outlined">
+            partly_cloudy_day
+            </span>
+            <br/> 12°C 
+            <br/>Friday </th>
+          <th scope="col" class="otherdays"><span class="material-symbols-outlined">
+            clear_day
+            </span>
+          <br/> 25°C
+          <br/>Saturday</th>
+          <th scope="col" class="otherdays"><span class="material-symbols-outlined">
+            cloudy_snowing
+            </span>
+          <br/>25°C
+          <br/>Sunday</th>
+          <th scope="col" class="otherdays"><span class="material-symbols-outlined">
+            weather_hail
+            </span>
+          <br/>-5°C
+          <br/>Monday</th>
+          <th scope="col" class="otherdays"><span class="material-symbols-outlined">
+            clear_day
+            </span>
+          <br/>48°C
+          <br/>Tuesday</th>
+          <th scope="col" class="otherdays"><span class="material-symbols-outlined">
+            cloudy_snowing
+            </span>
+          <br/>-6°C
+          <br/>Wednesday</th>
+          </tr>
+    </table>
+
+  </div>
+</body><script src="index.js"></script>
+</body>
+</html>
