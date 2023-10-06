@@ -11,26 +11,17 @@ function formatDate() {
   ];
   let day = days[now.getDay()];
   let date = now.getDate();
-  let months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  let month = months[now.getMonth()];
+
   let hour = now.getHours();
+  if (hour < 10) {
+    hour = `0${hour}`;
+  }
   let minutes = now.getMinutes();
-  return `${hour}:${minutes}<br/> 
-${month}${date}<br/>
-${day}`;
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  return `${day} <br/> 
+Last update at: ${hour}:${minutes}`;
 }
 //Calling for format date function
 let nows = document.querySelector("#today");
@@ -38,34 +29,143 @@ nows.innerHTML = formatDate();
 //search box
 function showTemprature(response) {
   let tempreture = document.querySelector("#tempreture");
-  let t = Math.round(response.data.main.temp);
-  tempreture.innerHTML = t;
+  let iconElement = document.querySelector("#icon");
+  let weatherDescription = document.querySelector("#weatherDescription");
+  let humidty = document.querySelector("#humidty");
+  let wind = document.querySelector("#wind");
+  let app = document.querySelector("#myapp");
+  let descriptionIcon = response.data.condition.icon;
   let locationhere = document.querySelector("#city-location");
-  locationhere.innerHTML = response.data.name;
+  tempretureC = response.data.temperature.current;
+  locationhere.innerHTML = response.data.city;
+  tempreture.innerHTML = Math.round(response.data.temperature.current);
+  iconElement.setAttribute("src", response.data.condition.icon_url);
+  iconElement.setAttribute("alt", response.data.condition.icon);
+  weatherDescription.innerHTML = response.data.condition.description;
+  humidty.innerHTML = `Humidity: ${response.data.temperature.humidity}%`;
+  wind.innerHTML = `Wind: ${Math.round(response.data.wind.speed * 3.6)}km/h`;
+  if (
+    descriptionIcon === "clear-sky-night" ||
+    descriptionIcon === "few-clouds-night" ||
+    descriptionIcon === "scattered-clouds-night" ||
+    descriptionIcon === "broken-clouds-night" ||
+    descriptionIcon === "shower-rain-nighty" ||
+    descriptionIcon === "rain-night" ||
+    descriptionIcon === "thunderstorm-night" ||
+    descriptionIcon === "snow-night" ||
+    descriptionIcon === "mist-night"
+  ) {
+    app.style.color = "white";
+  } else {
+    app.style.color = "black";
+  }
+  if (descriptionIcon === "clear-sky-day") {
+    app.style.background =
+      "linear-gradient(70deg, rgb(112, 206, 220) 35.6%, rgb(200, 242, 84) 99.2%)";
+  }
+  if (descriptionIcon === "clear-sky-night") {
+    app.style.background =
+      "linear-gradient(109.6deg, rgb(43, 1, 91) 13.4%, rgb(122, 2, 54) 100.2%)";
+  }
+  if (
+    descriptionIcon === "few-clouds-day" ||
+    descriptionIcon === "scattered-clouds-day"
+  ) {
+    app.style.background = "linear-gradient(to right, #83a4d4, #b6fbff)";
+  }
+  if (
+    descriptionIcon === "few-clouds-night" ||
+    descriptionIcon === "scattered-clouds-night"
+  ) {
+    app.style.background =
+      "linear-gradient(89.7deg, rgb(0, 0, 0) -10.7%, rgb(53, 92, 125) 88.8%)";
+  }
+  if (descriptionIcon === "broken-clouds-day") {
+    app.style.background =
+      "linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898";
+  }
+  if (descriptionIcon === "broken-clouds-night") {
+    app.style.background =
+      "radial-gradient(590px at 8.2% 13.8%, rgb(18, 35, 60) 0%, rgb(187, 187, 187) 90%)rgb(246, 253, 143)";
+  }
+  if (descriptionIcon === "shower-rain-day") {
+    app.style.background =
+      "linear-gradient(104.3deg, rgb(253, 243, 243) 10.9%, rgb(248, 231, 231) 27.8%, rgb(160, 112, 161) 101.7%)";
+  }
+  if (descriptionIcon === "shower-rain-nighty") {
+    app.style.background =
+      "linear-gradient(109.6deg, rgb(9, 9, 121) 11.2%, rgb(144, 6, 161) 53.7%, rgb(0, 212, 255) 100.2%)";
+  }
+  if (descriptionIcon === "rain-day)") {
+    app.style.background = "linear-gradient(-225deg, #CBBACC 0%, #2580B3 100%)";
+  }
+  if (descriptionIcon === "rain-night") {
+    app.style.background =
+      "rgblinear-gradient(181deg, rgb(2, 0, 97) 15%, rgb(97, 149, 219) 158.5%)";
+  }
+  if (descriptionIcon === "thunderstorm-day") {
+    app.style.background =
+      "linear-gradient(87.4deg, rgb(255, 241, 165) 1.9%, rgb(200, 125, 76) 49.7%, rgb(83, 54, 54) 100.5%)";
+  }
+  if (descriptionIcon === "thunderstorm-night") {
+    app.style.background =
+      "linear-gradient(110.6deg, rgb(156, 116, 129) -18.3%, rgb(67, 54, 74) 16.4%, rgb(47, 48, 67) 68.2%, rgb(27, 23, 36) 99.1%)";
+  }
+  if (descriptionIcon === "snow-day") {
+    app.style.background =
+      "radial-gradient(253px at 12.6% 77.9%, rgb(221, 255, 214) 0.3%, rgb(214, 254, 254) 90.5%)";
+  }
+  if (descriptionIcon === "snow-night") {
+    app.style.background =
+      "linear-gradient(111.1deg, rgb(0, 40, 70) -4.8%, rgb(255, 115, 115) 82.7%, rgb(255, 175, 123) 97.2%)";
+  }
+  if (descriptionIcon === "mist-day") {
+    app.style.background =
+      "linear-gradient(to top, lightgrey 0%, lightgrey 1%, #e0e0e0 26%, #efefef 48%, #d9d9d9 75%, #bcbcbc 100%)";
+  }
+  if (descriptionIcon === "mist-night") {
+    app.style.background =
+      "linear-gradient(to right, #868f96 0%, #596164 100%)";
+  }
 }
-function search(event) {
+function search(city) {
+  /// call api for temprature
+  let apiKey = "7513b452c09o45a7101tdb174f808e29";
+  let url = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+  axios.get(url).then(showTemprature);
+}
+function submitButton(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#seach-text-input");
-  let location = document.querySelector("#city-location");
-  location.innerHTML = searchInput.value;
-  /// call api for temprature
-  let apiKey = "5da7b2dc058f07286fea39c4cee516a3";
-  let url = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&appid=${apiKey}&&units=metric`;
-  axios.get(url).then(showTemprature);
+  search(searchInput.value);
+}
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", submitButton);
+
+//Celcius to Farenheit and vice verca
+
+function showFarenheit(event) {
+  event.preventDefault();
+  celsiusLink.classList.remove("active");
+  farenheitLink.classList.add("active");
+  let temperatureValue = document.querySelector("#tempreture");
+  let fahrenheitValue = (tempretureC * 9) / 5 + 32;
+  temperatureValue.innerHTML = Math.round(fahrenheitValue);
+  console.log(temperatureValue);
 }
 
-function showPosition(position) {
-  let apiKey = "5da7b2dc058f07286fea39c4cee516a3";
-  let url = ` https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&&units=metric`;
-  axios.get(url).then(showTemprature);
-}
-function getCurrentPosition() {
-  navigator.geolocation.getCurrentPosition(showPosition);
+function showCelcius(event) {
+  event.preventDefault();
+  farenheitLink.classList.remove("active");
+  celsiusLink.classList.add("active");
+  let temperatureValue = document.querySelector("#tempreture");
+  temperatureValue.innerHTML = Math.round(tempretureC);
 }
 
-let form = document.querySelector("#seach-form");
-form.addEventListener("submit", search);
+let farenheitLink = document.querySelector("#farenheit");
+farenheitLink.addEventListener("click", showFarenheit);
 
-//current location
-let button = document.querySelector("#current-location");
-button.addEventListener("click", getCurrentPosition);
+let celsiusLink = document.querySelector("#celcius");
+celsiusLink.addEventListener("click", showCelcius);
+
+search("Tehran");
