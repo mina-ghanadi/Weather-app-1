@@ -76,54 +76,32 @@
           <!--Weather symbole-->
           <div class="col-4 weather-icon">
             <img
-              src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-day.png"
-              alt="Clear"
+              src="#"
+              alt=""
               id="icon"
               class="float-left"
             />
-            <br /><span id="weatherDescription"> Sunny</span>
+            <br /><span id="weatherDescription"></span>
           </div>
         </div>
-        <table class="table table-bordered">
-          <tr class="otherdays">
-            <th scope="col" class="otherdays">
-              <span class="material-symbols-outlined"> partly_cloudy_day </span>
-              <br />
-              12°C <br />Friday
-            </th>
-            <th scope="col" class="otherdays">
-              <span class="material-symbols-outlined"> clear_day </span> <br />
-              25°C <br />Saturday
-            </th>
-            <th scope="col" class="otherdays">
-              <span class="material-symbols-outlined"> cloudy_snowing </span>
-              <br />25°C <br />Sunday
-            </th>
-            <th scope="col" class="otherdays">
-              <span class="material-symbols-outlined"> weather_hail </span>
-              <br />-5°C <br />Monday
-            </th>
-            <th scope="col" class="otherdays">
-              <span class="material-symbols-outlined"> clear_day </span>
-              <br />48°C <br />Tuesday
-            </th>
-            <th scope="col" class="otherdays">
-              <span class="material-symbols-outlined"> cloudy_snowing </span>
-              <br />-6°C <br />Wednesday
-            </th>
-          </tr>
-        </table>
+        <div class="forcast" id="forcast">
+          <div class="row">
+            
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+    <!--My name-->
     <span class="myname">
-      <a
+      <mark><a
         href="https://github.com/mina-ghanadi/mina-weather-app.github.io"
-        target="_blank"
+        target="_blank" style="color: rgb(4, 112, 22);"
       >
         Open-source code</a
       >
       by Mina Ghanadi
-      <span class="material-symbols-outlined owl"> flutter_dash </span></span
+      <span class="material-symbols-outlined owl"> flutter_dash </span></mark></span
     >
     <script src="index.js"></script>
   </body>

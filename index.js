@@ -23,9 +23,53 @@ function formatDate() {
   return `${day} <br/> 
 Last update at: ${hour}:${minutes}`;
 }
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
+}
 //Calling for format date function
 let nows = document.querySelector("#today");
 nows.innerHTML = formatDate();
+// forcast
+function showForcast(response) {
+  console.log(response);
+  let forcastday = response.data.daily;
+  console.log(forcastday);
+  let forcast = document.querySelector("#forcast");
+
+  let forcastHTML = `<div class="row">`;
+
+  forcastday.forEach(function (forcastdays, index) {
+    if (index > 0 && index < 7) {
+      forcastHTML =
+        forcastHTML +
+        `
+            <div class="col-2 each-day">
+              <div class="forcast-date">${formatDay(forcastdays.time)}</div>
+              <img
+                src="${forcastdays.condition.icon_url}"
+                alt=""
+                width="50px"
+              />
+              <div class="forcast-temprature">
+                <span class="max">${Math.round(
+                  forcastdays.temperature.maximum
+                )}°</span>
+                <span class="min">${Math.round(
+                  forcastdays.temperature.minimum
+                )}°</span>
+              </div>
+            </div>
+          `;
+    }
+  });
+  forcastHTML = forcastHTML + `</div>`;
+  forcast.innerHTML = forcastHTML;
+}
+
+function getForcast(coordinates) {}
 //search box
 function showTemprature(response) {
   let tempreture = document.querySelector("#tempreture");
@@ -44,6 +88,11 @@ function showTemprature(response) {
   weatherDescription.innerHTML = response.data.condition.description;
   humidty.innerHTML = `Humidity: ${response.data.temperature.humidity}%`;
   wind.innerHTML = `Wind: ${Math.round(response.data.wind.speed * 3.6)}km/h`;
+  //call for forcast function
+  let apiKeyF = "7513b452c09o45a7101tdb174f808e29";
+  let urlForcast = `https://api.shecodes.io/weather/v1/forecast?query=${response.data.city}&key=${apiKeyF}&units=metric`;
+  axios.get(urlForcast).then(showForcast);
+  // to change backgrounds and font color based on day/night and weather on that city
   if (
     descriptionIcon === "clear-sky-night" ||
     descriptionIcon === "few-clouds-night" ||
@@ -56,8 +105,12 @@ function showTemprature(response) {
     descriptionIcon === "mist-night"
   ) {
     app.style.color = "white";
+    document.body.style.backgroundImage =
+      "url('https://s31.picofile.com/file/8468403300/night.jpg')";
   } else {
     app.style.color = "black";
+    document.body.style.backgroundImage =
+      "url('https://s31.picofile.com/file/8468403292/day.jpg')";
   }
   if (descriptionIcon === "clear-sky-day") {
     app.style.background =

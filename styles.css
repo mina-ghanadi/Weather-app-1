@@ -1,14 +1,14 @@
 body {
-  background-color: rgb(225, 250, 215);
+  background-size: cover;
 }
 
 .myapp {
-  width: 60%;
+  width: 70%;
   border: 1px solid rgb(109, 109, 109);
   border-radius: 15px;
   display: block;
   margin: 0 auto;
-  margin-top: 20px;
+  margin-top: 100px;
   background-color: rgb(252, 252, 252);
   height: 450px;
 }
@@ -53,7 +53,7 @@ body {
   top: -20px;
 }
 .units .active {
-  color: rgb(33, 33, 33);
+  color: rgb(128, 124, 124);
   cursor: default;
   text-decoration: none;
 }
@@ -80,17 +80,26 @@ body {
   font-size: 16px;
   top: -20px;
 }
-table.table {
-  width: 80%;
-
-  table-layout: fixed;
-  margin: 10px auto;
-}
-
-tr.otherdays {
+.forcast {
+  margin-top: 20px;
   text-align: center;
-  vertical-align: auto;
-  padding: 10px;
+  color: black;
+  border: 2px solid gray;
+  border-radius: 7px;
+  margin: 20px;
+  background-color: rgb(255, 255, 255);
+}
+.each-day {
+  border-right: 1px solid grey;
+}
+.forcast-date {
+  font-weight: bold;
+}
+.min {
+  color: rgb(2, 4, 116);
+}
+.max {
+  color: rgb(145, 8, 8);
 }
 .myname {
   text-align: center;
